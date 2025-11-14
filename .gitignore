@@ -1,0 +1,6 @@
+.env
+server/*.json
+server/.env
+*.secret
+node_modules/
+dist/
