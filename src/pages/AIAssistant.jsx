@@ -154,21 +154,9 @@ const AIAssistant = () => {
     "What should I do in a flood?", "How do I find emergency shelters?",
   ];
 
-  if (!geminiApiKey) {
-    return (
-      <div className="h-[calc(100vh-12rem)] flex flex-col items-center justify-center p-4">
-        <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Setup Gemini API</h1>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">Please enter your Google Gemini API key to use the AI assistant.</p>
-          <form onSubmit={handleApiKeySubmit} className="space-y-4">
-            <input type="password" value={geminiApiKey} onChange={(e) => setGeminiApiKey(e.target.value)} placeholder="Enter your Gemini API key" className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"/>
-            <button type="submit" className="w-full px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500">Setup Assistant</button>
-          </form>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-3">Get your API key from <a href="https://makersuite.google.com/app/apikey" target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:text-primary-700">Google AI Studio</a></p>
-        </div>
-      </div>
-    );
-  }
+  // Render the assistant UI regardless of whether an API key is present.
+  // The app will still attempt to initialize the Gemini client when an API key
+  // is available via `import.meta.env.VITE_GEMINI_API_KEY` or `localStorage`.
 
   return (
     <div className="h-[calc(100vh-4rem)] w-full max-w-4xl mx-auto flex flex-col p-4 bg-gray-50 dark:bg-gray-900">
