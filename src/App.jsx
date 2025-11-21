@@ -31,6 +31,15 @@ function ScrollToTop() {
   return null
 }
 
+function ConditionalFooter() {
+  const location = useLocation()
+  // Hide footer on Instructions page due to fixed sidebar
+  if (location.pathname === '/instructions') {
+    return null
+  }
+  return <Footer />
+}
+
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
@@ -70,7 +79,7 @@ function App() {
             
             <EmergencyButton />
             <LocationGate />
-            <Footer />
+            <ConditionalFooter />
           </div>
         </Router>
         </LanguageProvider>

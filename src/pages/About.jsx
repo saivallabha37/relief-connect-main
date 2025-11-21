@@ -1,7 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import { Heart, Shield, Users, Globe, Mail, Phone, MapPin } from 'lucide-react'
-import useRevealOnScroll from '../hooks/useRevealOnScroll'
 
 const About = () => {
   const team = [
@@ -9,7 +7,7 @@ const About = () => {
       name: 'Dr. A. Sharma',
       role: 'Emergency Response Director',
       bio: 'Former NDRF coordinator with 15+ years in disaster management',
-      image: '👩‍⚕️'
+      image: '👩‍⚕'
     },
     {
       name: 'R. Kumar',
@@ -54,12 +52,10 @@ const About = () => {
     }
   ]
 
-  useRevealOnScroll()
-
   return (
-    <div className="space-y-12 responsive-container">
+    <div className="space-y-12">
       {/* Hero Section */}
-      <div className="text-center reveal reveal-delay-1">
+      <div className="text-center">
         <h1 className="text-4xl font-bold text-neutral-900 dark:text-white mb-4">
           About ReliefConnect India
         </h1>
@@ -70,7 +66,7 @@ const About = () => {
       </div>
 
       {/* Mission Statement */}
-      <div className="card reveal reveal-delay-2">
+      <div className="card">
         <div className="text-center mb-8">
           <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">Our Mission</h2>
           <p className="text-lg text-neutral-700 dark:text-neutral-300 max-w-4xl mx-auto leading-relaxed">
@@ -85,7 +81,7 @@ const About = () => {
         <h2 className="text-2xl font-bold text-neutral-900 dark:text-white text-center mb-8">Our Values</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {values.map((value, index) => (
-            <div key={index} className="card text-center reveal reveal-delay-2">
+            <div key={index} className="card text-center">
               <div className="bg-primary-100 dark:bg-primary-900 p-3 rounded-full w-fit mx-auto mb-4">
                 <value.icon className="h-6 w-6 text-primary-600 dark:text-primary-400" />
               </div>
@@ -100,98 +96,35 @@ const About = () => {
         </div>
       </div>
 
-      {/* Team */}
-      <div>
-        <h2 className="text-2xl font-bold text-neutral-900 dark:text-white text-center mb-8">Our Team</h2>
+      {/* (Original 'Our Team' and 'Our Impact' sections removed per request) */}
+
+      {/* Team Members (cards) */}
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold text-neutral-900 dark:text-white text-center mb-6">HopeHackers</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {team.map((member, index) => (
-            <div key={index} className="card text-center">
-              <div className="text-4xl mb-4">{member.image}</div>
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-1">
-                {member.name}
-              </h3>
-              <p className="text-sm text-primary-600 dark:text-primary-400 font-medium mb-2">
-                {member.role}
-              </p>
-              <p className="text-xs text-neutral-600 dark:text-neutral-400">
-                {member.bio}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
+          <div className="card text-center">
+            <div className="text-4xl mb-3">👑</div>
+            <p className="font-bold text-lg text-neutral-900 dark:text-white">SAI VALLABHA</p>
+            <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">Team ID: INVX1-HT-C3D2</p>
+            <p className="text-xs text-neutral-600 dark:text-neutral-400">Roll: 1602-24-737-149 • Class: 2-C</p>
+          </div>
 
-      {/* Statistics */}
-      <div className="card bg-gradient-to-r from-primary-50 to-secondary-50 dark:from-primary-900/20 dark:to-secondary-900/20">
-        <h2 className="text-2xl font-bold text-neutral-900 dark:text-white text-center mb-8">Our Impact</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          <div>
-            <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-1">28+</div>
-            <div className="text-sm text-neutral-600 dark:text-neutral-400">States & UTs Served</div>
+          <div className="card text-center">
+            <div className="text-4xl mb-3">👤</div>
+            <p className="font-bold text-lg text-neutral-900 dark:text-white">ROHAN</p>
+            <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-1">Roll: 1602-24-737-160 • Class: 2-C</p>
           </div>
-          <div>
-            <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-1">1M+</div>
-            <div className="text-sm text-neutral-600 dark:text-neutral-400">People Helped</div>
-          </div>
-          <div>
-            <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-1">10K+</div>
-            <div className="text-sm text-neutral-600 dark:text-neutral-400">Active Volunteers</div>
-          </div>
-          <div>
-            <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-1">24/7</div>
-            <div className="text-sm text-neutral-600 dark:text-neutral-400">Support Available</div>
-          </div>
-        </div>
-      </div>
 
-      {/* Contact Information */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="card">
-          <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-4">Contact Us</h3>
-          <div className="space-y-3">
-            <div className="flex items-center">
-              <Mail className="h-5 w-5 text-primary-600 dark:text-primary-400 mr-3" />
-              <div>
-                <p className="font-medium text-neutral-900 dark:text-white">Email</p>
-                <p className="text-sm text-neutral-600 dark:text-neutral-400">contact@humanitarianaid.org</p>
-              </div>
-            </div>
-            <div className="flex items-center">
-              <Phone className="h-5 w-5 text-primary-600 dark:text-primary-400 mr-3" />
-              <div>
-              <p className="font-medium text-neutral-900 dark:text-white">Emergency Hotline</p>
-              <p className="text-sm text-neutral-600 dark:text-neutral-400">112 (National)</p>
-              </div>
-            </div>
-            <div className="flex items-center">
-              <MapPin className="h-5 w-5 text-primary-600 dark:text-primary-400 mr-3" />
-              <div>
-                <p className="font-medium text-neutral-900 dark:text-white">Headquarters</p>
-                <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                  12 Relief Avenue<br />
-                  New Delhi, 110001
-                </p>
-              </div>
-            </div>
+          <div className="card text-center">
+            <div className="text-4xl mb-3">👤</div>
+            <p className="font-bold text-lg text-neutral-900 dark:text-white">NISHANTH</p>
+            <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-1">Roll: 1602-24-737-158 • Class: 2-C</p>
           </div>
-        </div>
 
-        <div className="card">
-          <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-4">Get Involved</h3>
-          <div className="space-y-4">
-            <p className="text-sm text-neutral-600 dark:text-neutral-400">
-              Join our mission to help communities in crisis. There are many ways to get involved:
-            </p>
-            <ul className="text-sm text-neutral-600 dark:text-neutral-400 space-y-2">
-              <li>• Volunteer your time and skills</li>
-              <li>• Make a donation to support our work</li>
-              <li>• Spread awareness in your community</li>
-              <li>• Partner with us as an organization</li>
-              <li>• Provide feedback to improve our services</li>
-            </ul>
-            <div className="pt-2">
-              <StartButton />
-            </div>
+          <div className="card text-center">
+            <div className="text-4xl mb-3">👤</div>
+            <p className="font-bold text-lg text-neutral-900 dark:text-white">REVANTH</p>
+            <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-1">Roll: 1602-24-737-159 • Class: 2-C</p>
           </div>
         </div>
       </div>
@@ -224,17 +157,3 @@ const About = () => {
 }
 
 export default About
-
-function StartButton() {
-  const navigate = useNavigate()
-  const handleClick = () => {
-    // Navigate to donations page and open volunteer tab
-    navigate('/donations?tab=volunteer')
-  }
-
-  return (
-    <button onClick={handleClick} className="btn-primary w-full">
-      Start Helping Today
-    </button>
-  )
-}

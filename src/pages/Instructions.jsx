@@ -482,7 +482,7 @@ Recovery Steps:
   }
 
   return (
-    <div className="responsive-container py-8">
+    <div className="responsive-container py-8 pb-32">
       <div className="flex relative">
       {/* Main Content Area */}
       <div className="flex-1 space-y-6 pr-0 lg:pr-80">

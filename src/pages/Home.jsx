@@ -444,19 +444,21 @@ const Home = () => {
           <Link 
             key={index} 
             to={action.href} 
-            className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 hover:shadow-xl transition-all duration-300 group focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transform hover:scale-105 h-48 flex flex-col justify-between"
+            className="card h-52 p-6 transition-all duration-300 group focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 flex flex-col justify-between shadow-md hover:shadow-xl hover:-translate-y-2 hover:scale-105"
           >
-            <div className="flex flex-col items-start">
+            <div className="flex flex-col items-start flex-grow">
               <div className={`${action.color} w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200 shadow-md flex-shrink-0`}>
                 <action.icon className="h-6 w-6 text-white" />
               </div>
-              <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-2 leading-tight line-clamp-2">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 leading-tight line-clamp-2 flex-grow">
                 {action.title}
               </h3>
             </div>
-            <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed line-clamp-3">
-              {action.description}
-            </p>
+            <div className="mt-auto">
+              <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed line-clamp-2">
+                {action.description}
+              </p>
+            </div>
           </Link>
         ))}
       </div>

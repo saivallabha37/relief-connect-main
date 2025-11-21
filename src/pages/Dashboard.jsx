@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDatabase } from '../contexts/DatabaseContext'
 import { Users, Clock, MapPin, Phone, Mail, Star, Award, Filter, Search, AlertTriangle, CheckCircle, Activity } from 'lucide-react'
-import SimpleMap from '../components/SimpleMap'
+import AlertsMap from '../components/AlertsMap'
 
 const Dashboard = () => {
   const { alerts, volunteers, helpRequests } = useDatabase()
@@ -282,7 +282,41 @@ const Dashboard = () => {
                   <Award className="h-3 w-3 mr-1" />
                   {volunteer.badge}
                 </span>
-                <button className="btn-primary">Contact</button>
+                <button 
+                  onClick={() => {
+                    // Create contact options
+                    const contactOptions = [
+                      `Call: ${volunteer.phone}`,
+                      `Email: ${volunteer.email}`,
+                      'Send Message'
+                    ]
+                    
+                    // Show contact options
+                    const choice = window.confirm(
+                      `Contact ${volunteer.name}\n\n` +
+                      `📞 Phone: ${volunteer.phone}\n` +
+                      `📧 Email: ${volunteer.email}\n` +
+                      `📍 Location: ${volunteer.location}\n\n` +
+                      'Click OK to call or Cancel to copy email address.'
+                    )
+                    
+                    if (choice) {
+                      // Try to initiate call
+                      window.open(`tel:${volunteer.phone}`, '_self')
+                    } else {
+                      // Copy email to clipboard
+                      navigator.clipboard.writeText(volunteer.email).then(() => {
+                        alert(`Email address copied: ${volunteer.email}`)
+                      }).catch(() => {
+                        // Fallback for older browsers
+                        window.open(`mailto:${volunteer.email}`, '_blank')
+                      })
+                    }
+                  }}
+                  className="btn-primary hover:bg-primary-700 transition-colors duration-200"
+                >
+                  Contact
+                </button>
               </div>
             </div>
           ))}
@@ -292,13 +326,82 @@ const Dashboard = () => {
       {/* Overview Tab */}
       {activeTab === 'overview' && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Map Component */}
+          {/* Interactive Map Component */}
           <div className="lg:col-span-1">
-            <SimpleMap 
-              alerts={alerts} 
-              volunteers={volunteers} 
-              helpRequests={helpRequests}
-            />
+            <div className="card">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Emergency Locations</h3>
+              <AlertsMap 
+                alerts={alerts?.filter(alert => alert.lat && alert.lng) || []} 
+                userLocation={null}
+              />
+              
+              {/* Nearby Items Section */}
+              <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-600">
+                <div className="flex items-center mb-3">
+                  <MapPin className="h-4 w-4 text-gray-500 dark:text-gray-400 mr-2" />
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Nearby ({((alerts?.length || 0) + (volunteers?.length || 0)).toString()} items)
+                  </span>
+                </div>
+                
+                <div className="space-y-2 max-h-64 overflow-y-auto">
+                  {/* Nearby Volunteers */}
+                  {volunteers?.slice(0, 3).map((volunteer) => (
+                    <div key={`volunteer-${volunteer.id}`} className="flex items-center p-2 bg-gray-50 dark:bg-gray-700/30 rounded-lg">
+                      <div className="w-2 h-2 bg-green-500 rounded-full mr-3 flex-shrink-0"></div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
+                          {volunteer.name}
+                        </p>
+                        <p className="text-xs text-gray-600 dark:text-gray-400 truncate">
+                          {volunteer.location} • {volunteer.skills[0]} • Available Now
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                  
+                  {/* Nearby Emergency Alerts */}
+                  {alerts?.slice(0, 3).map((alert) => (
+                    <div key={`alert-${alert.id}`} className="flex items-center p-2 bg-gray-50 dark:bg-gray-700/30 rounded-lg">
+                      <div className={`w-2 h-2 rounded-full mr-3 flex-shrink-0 ${
+                        alert.severity === 'critical' ? 'bg-red-500' :
+                        alert.severity === 'high' ? 'bg-orange-500' :
+                        alert.severity === 'medium' ? 'bg-yellow-500' : 'bg-blue-500'
+                      }`}></div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
+                          {alert.alert_type === 'medical' ? 'Medical Emergency' : 
+                           alert.alert_type === 'flood' ? 'Flood Warning' :
+                           alert.alert_type === 'infrastructure' ? 'Emergency Shelter' :
+                           alert.title}
+                        </p>
+                        <p className="text-xs text-gray-600 dark:text-gray-400 truncate">
+                          {alert.location} • {new Date(alert.created_at).toLocaleTimeString()} • {alert.severity}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                  
+                  {/* Nearby Help Requests */}
+                  {helpRequests?.slice(0, 2).map((request) => (
+                    <div key={`request-${request.id}`} className="flex items-center p-2 bg-gray-50 dark:bg-gray-700/30 rounded-lg">
+                      <div className={`w-2 h-2 rounded-full mr-3 flex-shrink-0 ${
+                        request.status === 'Pending' ? 'bg-yellow-500' :
+                        request.status === 'In Progress' ? 'bg-blue-500' : 'bg-green-500'
+                      }`}></div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
+                          {request.title}
+                        </p>
+                        <p className="text-xs text-gray-600 dark:text-gray-400 truncate">
+                          {request.location} • {request.status}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Recent Help Requests */}
