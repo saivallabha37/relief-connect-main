@@ -70,10 +70,6 @@ const initialSampleAlerts = [
     volunteers_needed: 10,
     volunteers_assigned: 12
   },
-    lng: 72.877656,
-    created_at: new Date(Date.now() - 1000 * 60 * 60 * 5).toISOString(), // 5 hours ago
-    active: true,
-  },
   {
     id: 5,
     title: 'Urban Flooding and Road Closures',
