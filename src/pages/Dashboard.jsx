@@ -340,28 +340,13 @@ const Dashboard = () => {
                 <div className="flex items-center mb-3">
                   <MapPin className="h-4 w-4 text-gray-500 dark:text-gray-400 mr-2" />
                   <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Nearby ({((alerts?.length || 0) + (volunteers?.length || 0)).toString()} items)
+                    Nearby ({((alerts?.length || 0) + (helpRequests?.length || 0)).toString()} items)
                   </span>
                 </div>
                 
                 <div className="space-y-2 max-h-64 overflow-y-auto">
-                  {/* Nearby Volunteers */}
-                  {volunteers?.slice(0, 3).map((volunteer) => (
-                    <div key={`volunteer-${volunteer.id}`} className="flex items-center p-2 bg-gray-50 dark:bg-gray-700/30 rounded-lg">
-                      <div className="w-2 h-2 bg-green-500 rounded-full mr-3 flex-shrink-0"></div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
-                          {volunteer.name}
-                        </p>
-                        <p className="text-xs text-gray-600 dark:text-gray-400 truncate">
-                          {volunteer.location} • {volunteer.skills[0]} • Available Now
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                  
                   {/* Nearby Emergency Alerts */}
-                  {alerts?.slice(0, 3).map((alert) => (
+                  {alerts?.slice(0, 4).map((alert) => (
                     <div key={`alert-${alert.id}`} className="flex items-center p-2 bg-gray-50 dark:bg-gray-700/30 rounded-lg">
                       <div className={`w-2 h-2 rounded-full mr-3 flex-shrink-0 ${
                         alert.severity === 'critical' ? 'bg-red-500' :
@@ -383,7 +368,7 @@ const Dashboard = () => {
                   ))}
                   
                   {/* Nearby Help Requests */}
-                  {helpRequests?.slice(0, 2).map((request) => (
+                  {helpRequests?.slice(0, 4).map((request) => (
                     <div key={`request-${request.id}`} className="flex items-center p-2 bg-gray-50 dark:bg-gray-700/30 rounded-lg">
                       <div className={`w-2 h-2 rounded-full mr-3 flex-shrink-0 ${
                         request.status === 'Pending' ? 'bg-yellow-500' :
