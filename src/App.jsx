@@ -48,7 +48,7 @@ function App() {
             <div className="flex">
               <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
               
-              <main className="flex-1 lg:ml-64 transition-all duration-300 pt-16">
+              <main className="flex-1 lg:ml-16 transition-all duration-300 pt-16">
                 <div className="p-4 lg:p-8">
                   <Routes>
                     <Route path="/" element={<div className="max-w-5xl mx-auto"><Home /></div>} />
