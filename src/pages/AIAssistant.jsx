@@ -106,7 +106,7 @@ const AIAssistant = () => {
       if (!genAI.current) {
         throw new Error("AI not initialized. Please reload the page.");
       }
-      const modelName = import.meta.env.VITE_GENAI_MODEL || "gemini-2.0-flash";
+      const modelName = import.meta.env.VITE_GENAI_MODEL || "gemini-2.5-flash";
       const model = genAI.current.getGenerativeModel({ model: modelName });
       const systemPrompt = `You are an Indian emergency response AI assistant. You help people during emergencies like floods, earthquakes, fires, medical emergencies, etc. Provide clear, concise, actionable steps with relevant emergency contact numbers when needed. Always prioritize safety and immediate action.\n\nUser question: ${messageToSend}`;
       const result = await model.generateContent(systemPrompt);

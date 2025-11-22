@@ -439,23 +439,23 @@ const Home = () => {
       </div>
 
       {/* Quick Actions */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 content-spacing">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 content-spacing items-start">
         {quickActions.map((action, index) => (
           <Link 
             key={index} 
             to={action.href} 
-            className="card h-52 p-6 transition-all duration-300 group focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 flex flex-col justify-between shadow-md hover:shadow-xl hover:-translate-y-2 hover:scale-105"
+            className="card h-52 p-6 transition-all duration-300 group focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 flex flex-col justify-between shadow-md hover:shadow-xl hover:-translate-y-2 hover:scale-105 align-top"
           >
             <div className="flex flex-col items-start flex-grow">
               <div className={`${action.color} w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200 shadow-md flex-shrink-0`}>
                 <action.icon className="h-6 w-6 text-white" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 leading-tight line-clamp-2 flex-grow">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 leading-tight line-clamp-2 flex-grow min-h-[3.5rem]">
                 {action.title}
               </h3>
             </div>
             <div className="mt-auto">
-              <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed line-clamp-2">
+              <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed line-clamp-2 min-h-[2.5rem]">
                 {action.description}
               </p>
             </div>
